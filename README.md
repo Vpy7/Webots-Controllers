@@ -36,6 +36,7 @@ Se proporciona el Directorio de proyecto `TBOT3_FOOTBALL`, que contiene un ejemp
 Puedes modificar:
 
 - **Entorno** (`Mundo.wbt`).
+- **Aparato Lidar** ( Se proporciona actualización `RobotisLds02.proto`).
 - **Sistema de recompensas** (`get_reward` en `controlador.py`).
 - **Espacio de observación y acción** (`TBot3` en `controlador.py`).
 - **Estrategia de entrenamiento** (`PPO_agent.py`).
