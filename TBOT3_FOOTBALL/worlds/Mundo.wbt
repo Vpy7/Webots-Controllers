@@ -1,0 +1,73 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "../protos/RobotstadiumSoccerField.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/robotis/turtlebot/protos/TurtleBot3Burger.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/balls/protos/FifaSoccerBall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/devices/robotis/protos/RobotisLds01.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.19338740015278655 0.2108324605053514 0.958201955257557 1.5271531772406
+  position 1.168729072936743 -5.672248659531524 2.7655983889296367
+  follow "fifa soccer ball"
+  followType "Pan and Tilt Shot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RobotstadiumSoccerField {
+}
+TurtleBot3Burger {
+  translation -0.5 0 0
+  name "Forward"
+  controller "controlador"
+  supervisor TRUE
+  extensionSlot [
+    InertialUnit {
+    }
+    RobotisLds01 {
+    }
+  ]
+}
+TurtleBot3Burger {
+  translation 4 0 0
+  rotation 0 0 1 3.14159
+  name "Goalie"
+  supervisor TRUE
+  extensionSlot [
+    InertialUnit {
+    }
+    RobotisLds01 {
+    }
+  ]
+}
+TurtleBot3Burger {
+  translation 3 1 0
+  rotation 0 0 1 3.14159
+  name "Goalie(1)"
+  supervisor TRUE
+  extensionSlot [
+    InertialUnit {
+    }
+    RobotisLds01 {
+    }
+  ]
+}
+TurtleBot3Burger {
+  translation 3 -1 0
+  rotation 0 0 1 3.14159
+  name "Goalie(2)"
+  supervisor TRUE
+  extensionSlot [
+    InertialUnit {
+    }
+    RobotisLds01 {
+    }
+  ]
+}
+DEF BALL FifaSoccerBall {
+}
