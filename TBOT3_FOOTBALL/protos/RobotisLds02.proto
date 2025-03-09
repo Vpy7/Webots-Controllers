@@ -1,0 +1,113 @@
+#VRML_SIM R2023b utf8
+# license: Copyright Cyberbotics Ltd. Licensed for use only with Webots.
+# license url: https://cyberbotics.com/webots_assets_license
+# documentation url: https://webots.cloud/run?url=https://github.com/cyberbotics/webots/blob/released/projects/devices/robotis/protos/RobotisLds02.proto
+# keywords: sensor/lidar
+# Model of the Robotis LDS-02 Laser Distance Sensor
+# Reference: http://www.robotis.us/360-laser-distance-sensor-lds-02-lidar/
+# template language: javascript
+
+EXTERNPROTO "webots://projects/appearances/protos/RoughPolymer.proto"
+EXTERNPROTO "webots://projects/objects/factory/tools/protos/CapScrew.proto"
+
+PROTO RobotisLds02 [
+  field SFVec3f    translation       0 0 0.02
+  field SFRotation rotation          0 0 1 0
+  field SFString   name              "LDS-02"
+  field SFFloat    noise             0.002
+  field SFBool     enablePhysics     TRUE
+]
+{
+  Lidar {
+    translation IS translation
+    rotation IS rotation
+    children [
+      Pose {
+        rotation 0 0.707103 0.70711 3.141585
+        children [
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+            }
+            device [
+              RotationalMotor {
+                name %<= '"' + fields.name.value + '_main_motor"' >%
+                maxVelocity 43
+              }
+            ]
+            endPoint Solid {
+              translation 0 -0.01 0
+              rotation 1 0 0 -1.5708
+              children [
+                Transform {
+                  scale 0.0012 0.0012 0.0012
+                  children [
+                    Shape {
+                      appearance DEF MAIN_APPEARANCE RoughPolymer {
+                        baseColor 0 0 0
+                      }
+                      geometry Mesh {
+                        url "meshes/turret.obj"
+                      }
+                    }
+                  ]
+                }
+              ]
+              name "lower"
+            }
+          }
+          Transform {
+            translation 0 -0.01 0
+            rotation -1 0 0 1.5708
+            scale 0.0012 0.0012 0.0012
+            children [
+              Shape {
+                appearance DEF MAIN_APPEARANCE RoughPolymer {
+                  baseColor 0 0 0
+                }
+                geometry Mesh {
+                  url "meshes/base.obj"
+                }
+              }
+            ]
+          }
+        ]
+      }
+      CapScrew {
+        translation 0.035 0.0245 -0.0105
+        rotation 0 -1 0 -1.570787
+        name "screw0"
+        screwRadius 0.0015
+        screwLength 0.02
+        enablePhysics IS enablePhysics
+      }
+    ]
+    name IS name
+    boundingObject Group {
+      children [
+        Pose {
+          translation 0 0 0
+          children [
+            Cylinder {
+              height 0.022
+              radius 0.035
+            }
+          ]
+        }
+      ]
+    }
+    %< if (fields.enablePhysics.value) { >%
+    physics Physics {
+      density -1
+      mass 0.131
+    }
+    %< } >%
+    horizontalResolution 720
+    fieldOfView 6.28318
+    numberOfLayers 1
+    near 0.16
+    minRange 0.16
+    maxRange 8.0
+    noise IS noise
+  }
+}
